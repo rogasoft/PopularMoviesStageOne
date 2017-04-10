@@ -15,5 +15,8 @@ import retrofit2.http.QueryMap;
 public interface RetrofitInterface {
 
     @GET("3/movie/popular")
-    Call<TotalResult> getMovie(@QueryMap Map<String, String> params);
+    Call<TotalResult> getMoviePopular(@QueryMap Map<String, String> params);
+
+    @GET("3/movie/top_rated")
+    Call<TotalResult> getMovieTop(@QueryMap Map<String, String> params);
 }

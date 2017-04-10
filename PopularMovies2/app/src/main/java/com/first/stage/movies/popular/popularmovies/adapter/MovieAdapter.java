@@ -6,10 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
 import com.first.stage.movies.popular.popularmovies.R;
 import com.first.stage.movies.popular.popularmovies.model.RecyclerMovieItemModel;
 import com.first.stage.movies.popular.popularmovies.utils.CustomViewHolder;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -29,15 +29,21 @@ public class MovieAdapter extends RecyclerView.Adapter<CustomViewHolder> {
 
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item_layout, null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item_layout, parent, false);
         CustomViewHolder customViewHolder = new CustomViewHolder(view);
         return customViewHolder;
     }
 
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
-        Glide.with(context).load(recyclerMovieItemModelList.get(position).getImage()).into(holder.movieImageView);
-        holder.movieTextView.setText(recyclerMovieItemModelList.get(position).getTitle());
+        Picasso.with(context).load(recyclerMovieItemModelList.get(position).getImage()).into(holder.movieImageView);
+        holder.initData(
+                recyclerMovieItemModelList.get(position).getTitle(),
+                recyclerMovieItemModelList.get(position).getImage(),
+                recyclerMovieItemModelList.get(position).getOverview(),
+                recyclerMovieItemModelList.get(position).getRate(),
+                recyclerMovieItemModelList.get(position).getDate()
+        );
     }
 
     @Override
